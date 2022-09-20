@@ -31,12 +31,16 @@ jobs:
           key: app-{{ checksum "pom.xml" }}
 
       # package into a jar
-      - run: mvn clean package
+      - run:
+          name: Packaging
+          command : mvn clean package
 
-      # build and push docker image to docker hub
-      - run: mvn clean compile -Dimage=aliyura/demo-ci:latest
+      - run:
+          name: Push app to DockerHub
+          command: docker build --tag=aliyura/demo-ci:latest .
+                   docker push aliyura/demo-ci:latest
 
-      # store raw contents of src code
-      - store_artifacts:
-          path: target/classes
-          destination: app
+      - run:
+          name: Deployment
+          command: ssh -i "decagon-keypair.pem" rabiu@ec2-3-18-32-139.us-east-2.compute.amazonaws.com
+                   sudo docker pull aliyura/demo-ci:latest
