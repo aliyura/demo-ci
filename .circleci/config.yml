@@ -38,5 +38,4 @@ jobs:
       - run:
           name: Deployment
           command: |
-            ssh $SERVER_HOST
-            whoami
+            ssh $SERVER_HOST && whoami
