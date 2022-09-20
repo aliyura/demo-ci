@@ -39,4 +39,4 @@ jobs:
           name: Deployment
           command: |
             ssh $SERVER_HOST
-            sudo docker pull aliyura/demo-ci:latest
+            docker pull aliyura/demo-ci:latest
