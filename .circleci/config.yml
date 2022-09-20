@@ -34,7 +34,7 @@ jobs:
       - run: mvn clean package
 
       # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=aliyura/demo-ci:$CIRCLE_BUILD_NUM
+      - run: mvn clean compile jib:build -Dimage=aliyura/demo-ci:latest
 
       # store raw contents of src code
       - store_artifacts:
