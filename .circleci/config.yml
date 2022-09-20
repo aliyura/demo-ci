@@ -9,6 +9,9 @@ jobs:
     steps:
       # git pull
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - $FINGERPRINT
 
       # setup testing env
       # the following commented lines are not allowed in the free version of circleci
@@ -42,5 +45,5 @@ jobs:
 
       - run:
           name: Deployment
-          command: ssh -i "decagon-keypair.pem" rabiu@ec2-3-18-32-139.us-east-2.compute.amazonaws.com
+          command: ssh $SERVER_HOST
                    sudo docker pull aliyura/demo-ci:latest
