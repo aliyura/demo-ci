@@ -8,13 +8,6 @@ jobs:
     steps:
       # git pull
       - checkout
-      - run:
-          name: Setting up Docker
-          command: |
-           echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
-           docker run -d --name db company/proprietary-db:1.2.3
-
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -30,6 +23,11 @@ jobs:
       - run:
           name: Packaging
           command : mvn clean package
+
+      - run:
+          name: Setting up Docker
+          command: |
+            echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
 
       - run:
           name: Push app to DockerHub
