@@ -19,7 +19,7 @@ jobs:
       #           docker_layer_caching: true
       - run:
           name: Login to DockerHub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+          command: sudo docker login -u $DOCKER_USER -p $DOCKER_PASS
 
       # Download and cache dependencies
       - restore_cache:
@@ -41,8 +41,8 @@ jobs:
       - run:
           name: Push app to DockerHub
           command: |
-            docker build --tag=aliyura/demo-ci:latest .
-            docker push aliyura/demo-ci:latest
+            sudo docker build --tag=aliyura/demo-ci:latest .
+            sudo docker push aliyura/demo-ci:latest
 
       - run:
           name: Deployment
