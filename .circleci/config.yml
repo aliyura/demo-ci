@@ -40,10 +40,12 @@ jobs:
 
       - run:
           name: Push app to DockerHub
-          command: docker build --tag=aliyura/demo-ci:latest .
-                   docker push aliyura/demo-ci:latest
+          command: |
+            docker build --tag=aliyura/demo-ci:latest .
+            docker push aliyura/demo-ci:latest
 
       - run:
           name: Deployment
-          command: ssh $SERVER_HOST
-                   sudo docker pull aliyura/demo-ci:latest
+          command: |
+            ssh $SERVER_HOST
+            sudo docker pull aliyura/demo-ci:latest
