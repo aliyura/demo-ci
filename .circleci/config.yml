@@ -39,4 +39,4 @@ jobs:
           name: Deployment
           command: |
             ssh $SERVER_HOST
-            docker pull aliyura/demo-ci:latest
+            whoami
